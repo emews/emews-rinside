@@ -19,10 +19,10 @@ build:
 # Remember to sync any dependency changes here with conda-install.sh
 requirements:
   build:
-    - emews-r
+    - emews-r-base
 
   run:
-    - emews-r
+    - emews-r-base
 
 test:
   commands:
@@ -33,9 +33,9 @@ test:
     - R -e 'library(RInside)'
 
 about:
-  home: https://github.com/emews/emews-r
+  home: https://github.com/emews/emews-rinside
   license: Apache License 2.0
-  summary: EMEWS build for R
+  summary: EMEWS build for RInside
 
 extra:
   recipe-maintainers:
