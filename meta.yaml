@@ -1,0 +1,42 @@
+
+{% set name = "emews-rinside" %}
+{% set version = "85879" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+# source:
+#   path: /Users/woz/proj/r-svn-clean
+
+build:
+  number: 1
+  # Environment variables for build.sh must be listed here,
+  # normal environment inheritance does not happen!
+  script_env:
+    - PLATFORM=osx-arm64
+
+# Remember to sync any dependency changes here with conda-install.sh
+requirements:
+  build:
+    - emews-r
+
+  run:
+    - emews-r
+
+test:
+  commands:
+    - echo
+    - echo "meta.yaml test commands:"
+    - which R Rscript
+    - R -e 'cat("R-SUCCESS:", 42, "\n")'
+    - R -e 'library(RInside)'
+
+about:
+  home: https://github.com/emews/emews-r
+  license: Apache License 2.0
+  summary: EMEWS build for R
+
+extra:
+  recipe-maintainers:
+    - swift-t
