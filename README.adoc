@@ -1,6 +1,8 @@
 
 = emews-rinside
 
+*THIS PACKAGE IS NO LONGER NEEDED as of 2024-12-06*
+
 A simple Anaconda package to do a `install.packages(RInside)` to the R in Anaconda package `swift-t::emews-r-base`.
 
 Only necessary for platform `osx-arm64`.
