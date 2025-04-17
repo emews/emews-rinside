@@ -98,7 +98,6 @@ if [[ -f $LOG ]] {
           -c conda-forge \
           -c swift-t     \
           --dirty        \
-          --prefix-length 80 \
           .
   )
   log "CONDA BUILD: STOP: ${(%)DATE_FMT_S}"
