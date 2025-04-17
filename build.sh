@@ -24,6 +24,7 @@ show()
   done
 }
 
+# Print key variables to log
 {
   echo "python: " $( which python  )
   echo "Rscript:" $( which Rscript )
@@ -33,7 +34,7 @@ show()
   show PREFIX
 } > $RECIPE_DIR/build-metadata.log
 
-# Cf. helpers.zsh
+# Print environment to log
 if [[ $PLATFORM =~ osx-* ]]
 then
   NULL=""
@@ -44,27 +45,29 @@ fi
 printenv ${NULL} | sort ${ZT} | tr '\0' '\n' > \
                                    $RECIPE_DIR/build-env.log
 
-if ! SDKROOT=$( xcrun --show-sdk-path )
-then
-  print "Error in xcrun!"
-  exit 1
-fi
-export SDKROOT
-show SDKROOT >> $RECIPE_DIR/build-metadata.log
+# if ! SDKROOT=$( xcrun --show-sdk-path )
+# then
+#   print "Error in xcrun!"
+#   exit 1
+# fi
+# export SDKROOT
+# show SDKROOT >> $RECIPE_DIR/build-metadata.log
 
 # Make it!
 {
   echo "INSTALL START: $( date '+%Y-%m-%d %H:%M:%S' )"
+  which Rscript
   Rscript $RECIPE_DIR/install-RInside.R
   echo "INSTALL STOP:  $( date '+%Y-%m-%d %H:%M:%S' )"
-} | tee $RECIPE_DIR/build-install.log
+} 2>&1 | tee $RECIPE_DIR/build-install.log
 
 # Test it!
 {
   echo "TEST RINSIDE START: $( date '+%Y-%m-%d %H:%M:%S' )"
-  $CONDA_PREFIX/bin/R --version
-  $CONDA_PREFIX/bin/R -e 'cat("R-TEST:", 42, "\n")'
-  $CONDA_PREFIX/bin/R -e 'library(RInside)'
+  which Rscript R
+  R --version
+  R -e 'cat("R-TEST:", 42, "\n")'
+  R -e 'library(RInside)'
   echo "TEST RINSIDE STOP:  $( date '+%Y-%m-%d %H:%M:%S' )"
 } 2>&1 | tee $RECIPE_DIR/build-test.log
 

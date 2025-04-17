@@ -1,13 +1,10 @@
 
 {% set name = "emews-rinside" %}
-{% set version = "85879" %}
+{% set version = "6" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
-
-# source:
-#   path: /Users/woz/proj/r-svn-clean
 
 build:
   number: 1
@@ -19,10 +16,10 @@ build:
 # Remember to sync any dependency changes here with conda-install.sh
 requirements:
   build:
-    - emews-r-base
+    - emews-r
 
   run:
-    - emews-r-base
+    - emews-r
 
 test:
   commands:
